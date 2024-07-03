@@ -1,11 +1,11 @@
-import './App.css'
 import Login from './app/auth/login'
+import Button from './components/ui/button/button'
 
 function App() {
 
   return (
     <>
-      <Login />
+      <Button variant='primary' >fff</Button>
     </>
   )
 }

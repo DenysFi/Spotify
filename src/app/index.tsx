@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import AppProvider from './main-provider';
+import Button from '@/components/ui/button/button';
 
 const App: FC = () => {
     return (
         <AppProvider>
-            f
+            <Button size={'lg'} >fff</Button>
         </AppProvider>
     )
 };

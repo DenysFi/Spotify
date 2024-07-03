@@ -1,9 +1,11 @@
 import { FC } from 'react'
+import AppProvider from './main-provider';
 
-const MainRoute: FC = () => {
+const App: FC = () => {
     return (
-        <>
-        </>
+        <AppProvider>
+            f
+        </AppProvider>
     )
 };
-export default MainRoute;
+export default App;

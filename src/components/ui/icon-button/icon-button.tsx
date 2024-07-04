@@ -1,6 +1,6 @@
 import { cn } from '@/utils/cn'
 import { cva, type VariantProps } from 'class-variance-authority'
-import React, { ButtonHTMLAttributes, forwardRef } from 'react'
+import { ButtonHTMLAttributes, forwardRef } from 'react'
 
 const iconButtonVariants = cva(
     'rounded-full flex items-center',

@@ -4,6 +4,9 @@
 
 @layer base {
     :root {
-        --
+        --ring: 0%, 0%, 100%;
+
+        --primary: 0, 0%, 0%;
+        --primary-foreground: 0, 0%, 100%;
     }
 }

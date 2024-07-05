@@ -5,7 +5,7 @@ import Button from '@/components/ui/button/button';
 const App: FC = () => {
     return (
         <AppProvider>
-            <Button size={'lg'} >fff</Button>
+            <Button size={'lg'} variant={'default'} >fff</Button>
         </AppProvider>
     )
 };

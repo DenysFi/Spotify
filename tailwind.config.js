@@ -21,7 +21,7 @@ export default {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        ring: 'hsl(var(--ring))',
+        ring: 'var(--ring)',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',

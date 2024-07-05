@@ -4,9 +4,9 @@ import Button from '@/components/ui/button/button';
 
 const App: FC = () => {
     return (
-        <div className='w-screen h-screen flex items-center justify-center'>
+        <div className='w-screen h-screen flex items-center justify-center '>
             <AppProvider>
-                <Button size={'lg'} variant={'default'} >fff</Button>
+                <Button size={'sm'} variant={'default'} >Установи приложение</Button>
             </AppProvider>
         </div>
     )

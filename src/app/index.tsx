@@ -4,9 +4,11 @@ import Button from '@/components/ui/button/button';
 
 const App: FC = () => {
     return (
-        <AppProvider>
-            <Button size={'lg'} variant={'default'} >fff</Button>
-        </AppProvider>
+        <div className='w-screen h-screen flex items-center justify-center'>
+            <AppProvider>
+                <Button size={'lg'} variant={'default'} >fff</Button>
+            </AppProvider>
+        </div>
     )
 };
 export default App;

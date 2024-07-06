@@ -22,6 +22,7 @@ export default {
       },
       colors: {
         ring: 'var(--ring)',
+        iconBgHover: 'hsl(var(--icon-foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -34,6 +35,7 @@ export default {
           DEFAULT: 'hsl(var(--text-button))',
           hover: 'hsl(var(--text-button-hover))',
         },
+
       },
     },
   },

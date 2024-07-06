@@ -4,21 +4,25 @@ import { VariantProps, cva } from 'class-variance-authority'
 import React from 'react'
 
 const buttonVariants = cva(
-    'disabled:pointer-events-none disabled:opacity-50 inline-flex items-center justifu-center transition-colors font-bold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap ',
+    'disabled:pointer-events-none disabled:opacity-50 inline-flex items-center overflow-hidden justifu-center transition-colors font-bold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap ',
     {
         variants: {
             variant: {
                 default: 'text-primary-foreground bg-primary ',
                 pillFilled: 'text-secondary-foreground bg-secondary  ',
-                text: 'text-textButton bg-transparent hover:text-textButton-hover'
+                text: 'text-textButton bg-transparent hover:text-textButton-hover',
+                icon: 'text-textButton bg-primary hover:text-textButton-hover',
+                iconTransparent: 'text-textButton bg-transparent hover:text-textButton-hover ',
             },
             size: {
                 sm: 'h-8 rounded-full px-4 py-1 text-sm ',
                 lg: 'h-10 rounded-md px-2 py-1 text-base',
-                icon: 'size-9',
+                icon: 'w-8 h-8 rounded-full flex items-center justify-center',
             },
             hover: {
                 pulse: 'hover:scale-105',
+                iconPrimaryHover: 'hover:bg-iconPrimaryHover',
+                iconSecondaryHover: 'hover:bg-iconSecondaryHover',
             },
         },
         defaultVariants: {
@@ -49,7 +53,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         iconRight,
         ...props
     }, ref) => {
-
         const Comp = asChild ? Slot : 'button';
         return (
             <Comp
@@ -65,4 +68,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )
     });
 
-export default Button
+Button.displayName = 'Button';
+
+export { Button, buttonVariants }

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import defaultTheme from 'tailwindcss/defaultTheme';
+import { colors } from '@/constants/color.constant';
 
 export default {
   content: [
@@ -22,6 +22,10 @@ export default {
       },
       colors: {
         ring: 'var(--ring)',
+        iconPrimaryHover: 'hsl(var(--icon-primary-foreground))',
+        iconSecondaryHover: 'hsl(var(--icon-secondaty-foreground))',
+
+
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -34,6 +38,7 @@ export default {
           DEFAULT: 'hsl(var(--text-button))',
           hover: 'hsl(var(--text-button-hover))',
         },
+
       },
     },
   },

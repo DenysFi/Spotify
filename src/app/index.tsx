@@ -1,14 +1,29 @@
-import { FC } from 'react'
+// import { Button } from '@/components/ui/button';
+// import SearchInput from '@/components/ui/search/search';
+// import { Bell, Download, Library, Menu } from 'lucide-react';
+import { type FC, useMemo } from 'react';
 import AppProvider from './main-provider';
-import Button from '@/components/ui/button/button';
-import { Download } from 'lucide-react';
+import { createRouter } from './routes';
+import { RouterProvider } from 'react-router-dom';
+
+const AppRouter = () => {
+
+    const router = useMemo(() => createRouter(), []);
+
+    return <RouterProvider router={router} />
+}
 
 const App: FC = () => {
-    return (
-        <div className='w-screen h-screen flex items-center justify-center bg-slate-600'>
 
-            <AppProvider>
-                <div className='flex gap-2'>
+    return (
+        <AppProvider>
+            <AppRouter />
+        </AppProvider>
+    )
+};
+export default App;
+
+{/* <div className='flex gap-2  items-center '>
                     <Button
                         size={'sm'}
                         variant={'default'}
@@ -27,12 +42,57 @@ const App: FC = () => {
                     <Button
                         size={'lg'}
                         variant={'text'}
+                        iconLeft={<Library />}
                     >
                         Моя медиатека
                     </Button>
+                    <Button
+                        size={'sm'}
+                        variant={'text'}
+                        iconRight={<Menu className='h-4 w-4' />}
+                    >
+                        Недавно прослушано
+                    </Button>
+                    <Button
+                        size={'icon'}
+                        variant={'icon'}
+                        hover={'pulse'}
+                    >
+                        <Bell className='h-4 w-4' />
+                    </Button>
+                    <Button
+                        size={'icon'}
+                        variant={'icon'}
+                        hover={'pulse'}
+                    >
+                        <div className=' w-full h-full px-[3px] py-[3px]  '>
+                            <span className='bg-green-400 w-full h-full text-black rounded-full flex items-center justify-center'>
+                                B
+                            </span>
+                        </div>
+                    </Button>
+                    <Button
+                        size='icon'
+                        variant='iconTransparent'
+                        hover='iconPrimaryHover'
+
+                    >
+                        <Bell className='h-4 w-4' />
+                    </Button>
+                    <Button
+                        size={'icon'}
+                        variant={'iconTransparent'}
+                        hover={'iconSecondaryHover'}
+                    >
+                        <Bell className='h-4 w-4' />
+                    </Button>
+                    <Button
+                        size={'icon'}
+                        variant={'iconTransparent'}
+                    >
+                        <Bell className='h-4 w-4' />
+                    </Button>
                 </div>
-            </AppProvider>
-        </div>
-    )
-};
-export default App;
+                <div className='flex gap-2  items-center '>
+                    <SearchInput size={undefined} />
+                </div> */}

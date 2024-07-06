@@ -14,9 +14,13 @@
 
         --text-button: 0, 0%, 64.71%;
         --text-button-hover: 0, 0%, 100%;
+
+        --icon-primary-foreground: 0, 0%, 16.47%;
+        --icon-secondaty-foreground: 0, 0%, 9.02%;
     }
 }
 
 body {
     font-family: 'nunito', sans-serif;
+    min-height: 100vh;
 }

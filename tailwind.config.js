@@ -18,13 +18,21 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        nunito: ['Nunito', 'sans-serif'],
       },
       colors: {
         ring: 'var(--ring)',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        textButton: {
+          DEFAULT: 'hsl(var(--text-button))',
+          hover: 'hsl(var(--text-button-hover))',
         },
       },
     },

@@ -8,5 +8,15 @@
 
         --primary: 0, 0%, 0%;
         --primary-foreground: 0, 0%, 100%;
+
+        --secondary: 0, 0%, 100%;
+        --secondary-foreground: 0, 0%, 0%;
+
+        --text-button: 0, 0%, 64.71%;
+        --text-button-hover: 0, 0%, 100%;
     }
+}
+
+body {
+    font-family: 'nunito', sans-serif;
 }

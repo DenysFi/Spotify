@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-import { colors } from '@/constants/color.constant';
 
 export default {
   content: [

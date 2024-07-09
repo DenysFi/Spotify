@@ -1,7 +1,7 @@
-import { cn } from '@/utils/cn'
+import { cn } from '@/utils/cn';
 import { Slot } from '@radix-ui/react-slot';
-import { VariantProps, cva } from 'class-variance-authority'
-import React from 'react'
+import { VariantProps, cva } from 'class-variance-authority';
+import React from 'react';
 
 const buttonVariants = cva(
     'disabled:pointer-events-none disabled:opacity-50 inline-flex items-center overflow-hidden justifu-center transition-colors font-bold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap ',
@@ -70,4 +70,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };
+

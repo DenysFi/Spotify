@@ -2,9 +2,9 @@
 // import SearchInput from '@/components/ui/search/search';
 // import { Bell, Download, Library, Menu } from 'lucide-react';
 import { type FC, useMemo } from 'react';
+import { RouterProvider } from 'react-router-dom';
 import AppProvider from './main-provider';
 import { createRouter } from './routes';
-import { RouterProvider } from 'react-router-dom';
 
 const AppRouter = () => {
 
@@ -42,6 +42,7 @@ export default App;
                     <Button
                         size={'lg'}
                         variant={'text'}
+                        iconLeft={<Library />}
                         iconLeft={<Library />}
                     >
                         Моя медиатека

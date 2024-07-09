@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-import { colors } from '@/constants/color.constant';
 
 export default {
   content: [
@@ -20,8 +19,13 @@ export default {
       fontFamily: {
         nunito: ['Nunito', 'sans-serif'],
       },
+      backgroundImage: {
+        'primaryBgGradient': "linear-gradient(rgba(255, 255, 255, 0.1) 0%, rgb(0, 0, 0) 100%)",
+      },
       colors: {
         ring: 'var(--ring)',
+        primaryBg: 'var(--primary-bg)',
+
         iconPrimaryHover: 'hsl(var(--icon-primary-foreground))',
         iconSecondaryHover: 'hsl(var(--icon-secondaty-foreground))',
 

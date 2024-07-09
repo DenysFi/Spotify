@@ -1,11 +1,11 @@
+import AuthLayout from '@/components/layouts/auth-layout'
 import React from 'react'
 
-function LoginRoute() {
+export function LoginRoute() {
   return (
-    <div>
-
-    </div>
+    <AuthLayout type='login'>
+      login
+    </AuthLayout>
   )
 }
 
-export default LoginRoute

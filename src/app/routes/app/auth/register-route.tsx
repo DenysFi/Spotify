@@ -1,11 +1,11 @@
+import AuthLayout from '@/components/layouts/auth-layout'
 import React from 'react'
 
-function RegisterRoute() {
+export function RegisterRoute() {
     return (
-        <div>
-
-        </div>
+        <AuthLayout type='registrate'>
+            register
+        </AuthLayout>
     )
 }
 
-export default RegisterRoute

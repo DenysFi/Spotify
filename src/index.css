@@ -5,6 +5,8 @@
 @layer base {
     :root {
         --ring: #FFFFFF;
+        --primary-bg: #121212;
+        --primary-bg-gradient: linear-gradient(rgba(255, 255, 255, 0.1) 0%, rgb(0, 0, 0) 100%);
 
         --primary: 0, 0%, 0%;
         --primary-foreground: 0, 0%, 100%;

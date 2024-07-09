@@ -1,6 +1,6 @@
-import { AudioLines, User } from 'lucide-react'
-import React, { type ReactElement } from 'react'
+import React, { type PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
+import Logo from '../ui/logo/logo'
 
 
 function Header() {
@@ -9,7 +9,7 @@ function Header() {
         <header className='bg-[#000] w-full h-[80px] flex items-center justify-center '>
             <div className='container text-white flex h-full items-center justify-between'>
                 <div>
-                    <AudioLines color='#1ED760' size={'50px'} />
+                    <Logo />
                 </div>
                 <nav >
                     <ul className='flex items-center justify-center font-bold'>
@@ -44,9 +44,9 @@ function Footer() {
 }
 
 
+interface LandingLayoutProps extends PropsWithChildren { }
 
-
-function LandingLayout({ children }: { children: ReactElement }) {
+function LandingLayout({ children }: LandingLayoutProps) {
 
     return (
         <main className='flex flex-col min-h-screen'>

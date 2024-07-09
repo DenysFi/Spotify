@@ -28,7 +28,7 @@ export default {
 
         iconPrimaryHover: 'hsl(var(--icon-primary-foreground))',
         iconSecondaryHover: 'hsl(var(--icon-secondaty-foreground))',
-
+        iconBgHover: 'hsl(var(--icon-foreground))',
 
         primary: {
           DEFAULT: 'hsl(var(--primary))',

@@ -1,11 +1,11 @@
-import AuthLayout from '@/components/layouts/auth-layout'
-import React from 'react'
+import AuthLayout from "@/components/layouts/auth-layout";
+import LoginForm from "@/features/auth/components/login-form";
+import React from "react";
 
 export function LoginRoute() {
   return (
-    <AuthLayout type='login'>
-      login
+    <AuthLayout type="login">
+      <LoginForm />
     </AuthLayout>
-  )
+  );
 }
-

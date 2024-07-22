@@ -1,11 +1,12 @@
-import AuthLayout from '@/components/layouts/auth-layout'
-import React from 'react'
+import AuthLayout from "@/components/layouts/auth-layout";
+import useClearFormData from "@/components/ui/form/useClearFormData.hook";
+import RegisterForm from "@/features/auth/components/register-form";
 
 export function RegisterRoute() {
-    return (
-        <AuthLayout type='registrate'>
-            register
-        </AuthLayout>
-    )
+  useClearFormData();
+  return (
+    <AuthLayout type="registrate">
+      <RegisterForm />
+    </AuthLayout>
+  );
 }
-

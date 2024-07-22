@@ -1,29 +1,28 @@
 // import { Button } from '@/components/ui/button';
 // import SearchInput from '@/components/ui/search/search';
 // import { Bell, Download, Library, Menu } from 'lucide-react';
-import { type FC, useMemo } from 'react';
-import { RouterProvider } from 'react-router-dom';
-import AppProvider from './main-provider';
-import { createRouter } from './routes';
+import { type FC, useMemo } from "react";
+import { RouterProvider } from "react-router-dom";
+import AppProvider from "./main-provider";
+import { createRouter } from "./routes";
 
 const AppRouter = () => {
+  const router = useMemo(() => createRouter(), []);
 
-    const router = useMemo(() => createRouter(), []);
-
-    return <RouterProvider router={router} />
-}
+  return <RouterProvider router={router} />;
+};
 
 const App: FC = () => {
-
-    return (
-        <AppProvider>
-            <AppRouter />
-        </AppProvider>
-    )
+  return (
+    <AppProvider>
+      <AppRouter />
+    </AppProvider>
+  );
 };
 export default App;
 
-{/* <div className='flex gap-2  items-center '>
+{
+  /* <div className='flex gap-2  items-center '>
                     <Button
                         size={'sm'}
                         variant={'default'}
@@ -96,4 +95,5 @@ export default App;
                 </div>
                 <div className='flex gap-2  items-center '>
                     <SearchInput size={undefined} />
-                </div> */}
+                </div> */
+}

@@ -11,11 +11,10 @@ import ChangeForm from "./ui/change-form";
 import { CircleAlert } from "lucide-react";
 import { FirebaseError } from "firebase/app";
 import { useState } from "react";
-import { useAuth } from "../context/useAuth";
 
 function Notification() {
   return (
-    <div className="  w-[90%] px-4 gap-2 bg-red-600 text-white flex items-center h-12 mb-6">
+    <div className="  mdmobile:w-[90%] rounded-md px-4 gap-2 bg-red-600 text-white flex items-center h-12 mb-6">
       <CircleAlert height={16} width={16} />
       <span>Неправильное имя пользователя или пароль.</span>
     </div>
@@ -33,10 +32,9 @@ function LoginForm() {
     email: string;
     password: string;
   }) {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       await doSignUserWithEmailAndPassword({ email, password });
-      setIsLoading;
     } catch (error) {
       console.error(error);
 
@@ -49,6 +47,7 @@ function LoginForm() {
         }
       }
     }
+    setIsLoading(false);
   }
 
   return (

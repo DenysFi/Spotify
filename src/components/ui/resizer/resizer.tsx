@@ -3,6 +3,7 @@ import { type HtmlHTMLAttributes, type ReactNode } from "react"
 
 import "./resizer.scss"
 import { useResizable, type UseResizableProps } from "./useResizable"
+import { ResizerProvider } from "./context/resizer-context"
 
 type ResizerProps = HtmlHTMLAttributes<HTMLDivElement> &
 	UseResizableProps & {
@@ -13,8 +14,8 @@ type ResizerProps = HtmlHTMLAttributes<HTMLDivElement> &
 function Resizer({
 	min,
 	max,
-	id,
-	saveLastWidth,
+	id = "resizerWidth",
+	saveLastWidth = true,
 	position,
 	children,
 	className,
@@ -30,39 +31,58 @@ function Resizer({
 		})
 
 	return (
-		<div
-			ref={contentRef}
-			className={cn("relative inline-block", className)}
-			{...props}
+		<ResizerProvider
+			initial={{
+				min,
+				max,
+				id,
+				saveLastWidth,
+				position,
+				setCurrentWidth,
+				isResizing,
+				currentWidth,
+			}}
 		>
 			<div
-				ref={resizerRef}
+				ref={contentRef}
 				className={cn(
-					" absolute flex items-center justify-center  h-full top-0 resizer-outline focus-within:after:opacity-100 focus-within:after:bg-[var(--resizer-bg-active)] after:h-[calc(100%-16px)] after:transition-all after:opacity-0 after:hover:opacity-100 duration-700 after:bg-[var(--resizer-bg-hover)] z-1000 cursor-grab w-[var(--panel-gap)] after:content-[''] after:w-[1px] ",
+					"relative inline-block ",
 					{
-						"start-[calc(var(--panel-gap)*-1)]": position === "left",
-						"end-[calc(var(--panel-gap)*-1)]": position === "right",
-						"after:opacity-100 after:bg-[var(--resizer-bg-active)] cursor-grabbing":
-							isResizing,
-					}
+						"transition-[width]": !isResizing,
+					},
+					className
 				)}
+				{...props}
 			>
-				<label className="w-[1px] h-[1px] margin-[-1px] overflow-hidden p-0 absolute border-0">
-					Изменить размер главной панели навигации
-					<input
-						type="range"
-						max={max}
-						min={min}
-						step={10}
-						dir={position === "left" ? "rtl" : "ltr"}
-						onChange={e => setCurrentWidth(parseInt(e.target.value))}
-						value={currentWidth}
-					/>
-				</label>
+				<div
+					ref={resizerRef}
+					className={cn(
+						" absolute flex items-center justify-center  h-full top-0 resizer-outline focus-within:after:opacity-100 focus-within:after:bg-[var(--resizer-bg-active)] after:h-[calc(100%-16px)] after:transition-all after:opacity-0 after:hover:opacity-100 duration-700 after:bg-[var(--resizer-bg-hover)] z-1000 cursor-grab w-[var(--panel-gap)] after:content-[''] after:w-[1px] ",
+						{
+							"start-[calc(var(--panel-gap)*-1)]": position === "left",
+							"end-[calc(var(--panel-gap)*-1)]": position === "right",
+							"after:opacity-100 after:bg-[var(--resizer-bg-active)] cursor-grabbing":
+								isResizing,
+						}
+					)}
+				>
+					<label className="w-[1px] h-[1px] margin-[-1px] overflow-hidden p-0 absolute border-0">
+						Изменить размер главной панели навигации
+						<input
+							type="range"
+							max={max}
+							min={min}
+							step={10}
+							dir={position === "left" ? "rtl" : "ltr"}
+							onChange={e => setCurrentWidth(parseInt(e.target.value))}
+							value={currentWidth}
+						/>
+					</label>
+				</div>
+				{children}
 			</div>
-			{children}
-		</div>
+		</ResizerProvider>
 	)
 }
 
-export default Resizer
+export { Resizer }

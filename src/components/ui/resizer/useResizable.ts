@@ -9,7 +9,7 @@ import {
 type ElementRefProps = HTMLElement | null
 type RefFunction = (nodeEle: ElementRefProps) => void
 
-type UseResizableReturnType = {
+export type UseResizableReturnType = {
 	contentRef: RefFunction
 	resizerRef: RefFunction
 	setCurrentWidth: Dispatch<SetStateAction<number>>
@@ -54,7 +54,11 @@ export const useResizable = ({
 			if (!contentNode) return
 
 			setIsResizing(true)
+
 			document.body.style.setProperty("user-select", "none")
+			document.body.style.setProperty("pointer-events", "none")
+
+			document.head.style.setProperty("cursor", "grabbing")
 
 			const x = e.clientX
 			const styles = window.getComputedStyle(contentNode)
@@ -82,6 +86,10 @@ export const useResizable = ({
 
 	const resetState = () => {
 		document.body.style.removeProperty("user-select")
+		document.body.style.removeProperty("pointer-events")
+
+		document.head.style.setProperty("cursor", "grabbing")
+
 		setIsResizing(false)
 	}
 

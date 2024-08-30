@@ -21,7 +21,7 @@ function AuthLayout({ children, type }: AuthLayoutProps) {
 
 	return (
 		<section
-			className={cn("h-full  w-full bg-primaryBg flex flex-col items-center ", {
+			className={cn("h-full w-full bg-primaryBg flex flex-col items-center ", {
 				"mdmobile:bg-primaryBgGradient mdmobile:p-8": isLogin,
 			})}
 		>

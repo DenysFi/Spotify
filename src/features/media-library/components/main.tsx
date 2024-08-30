@@ -9,7 +9,7 @@ import {
 	SidebarToggleButton,
 } from "@/components/ui/sidebar/sidebar"
 import { ArrowRight, Library, Menu } from "lucide-react"
-import Cards from "./cards"
+import RecentlyListened from "./cards"
 
 function MediaLibrary() {
 	return (
@@ -19,12 +19,7 @@ function MediaLibrary() {
 		>
 			<div className="px-4 py-2  flex items-center justify-between">
 				<SidebarToggleButton>
-					<Button
-						size={"lg"}
-						variant={"text"}
-						iconLeft={<Library />}
-						tabIndex={-1}
-					>
+					<Button size={"lg"} variant={"text"} iconLeft={<Library />}>
 						<SidebarItemHided>Моя медиатека</SidebarItemHided>
 					</Button>
 				</SidebarToggleButton>
@@ -34,7 +29,6 @@ function MediaLibrary() {
 							size={"icon"}
 							variant={"iconTransparent"}
 							hover={"iconSecondaryHover"}
-							tabIndex={-1}
 						>
 							<ArrowRight />
 						</Button>
@@ -42,7 +36,7 @@ function MediaLibrary() {
 				</SidebarItemHided>
 			</div>
 			<Scrollbar>
-				<div className=" pt-[1px] ">
+				<div className="pt-[1px] ">
 					<div className="px-2">
 						<SidebarItemHided>
 							<div className="flex justify-between px-2 transition-all mb-2">
@@ -66,7 +60,7 @@ function MediaLibrary() {
 							</div>
 						</SidebarItemHided>
 					</div>
-					<Cards />
+					<RecentlyListened />
 				</div>
 			</Scrollbar>
 		</Box>

@@ -11,6 +11,7 @@ import ChangeForm from "./ui/change-form"
 import { CircleAlert } from "lucide-react"
 import { FirebaseError } from "firebase/app"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function Notification() {
 	return (
@@ -25,6 +26,8 @@ function LoginForm() {
 	const [isNotFound, setIsError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
+	const navigate = useNavigate()
+
 	async function handleSubmit({
 		email,
 		password,
@@ -35,6 +38,7 @@ function LoginForm() {
 		setIsLoading(true)
 		try {
 			await doSignUserWithEmailAndPassword({ email, password })
+			navigate("/app")
 		} catch (error) {
 			console.error(error)
 

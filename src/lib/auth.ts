@@ -6,6 +6,8 @@ import {
 	getAuth,
 	GoogleAuthProvider,
 	signInWithPopup,
+	updateProfile,
+	FacebookAuthProvider,
 } from "firebase/auth"
 import { app } from "./firebase"
 
@@ -130,10 +132,12 @@ export const auth = getAuth(app)
 
 export const doCreateUserWithEmailAndPassword = async (
 	email: string,
-	password: string
+	password: string,
+	userName: string
 ) => {
 	try {
-		await createUserWithEmailAndPassword(auth, email, password)
+		const { user } = await createUserWithEmailAndPassword(auth, email, password)
+		await updateProfile(user, { displayName: userName })
 	} catch (error) {
 		console.error(error)
 	}
@@ -149,6 +153,11 @@ export const doSignUserWithEmailAndPassword = ({
 }
 
 export const doSignInWithGoogle = () => {
+	const provider = new GoogleAuthProvider()
+	return signInWithPopup(auth, provider)
+}
+
+export const doSignInWithApple = () => {
 	const provider = new GoogleAuthProvider()
 	provider.getCustomParameters
 	return signInWithPopup(auth, provider)

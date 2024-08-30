@@ -1,10 +1,70 @@
-import { SidebarItem } from "@/components/ui/sidebar/sidebar"
-import Card from "./card"
 import { useSidebar } from "@/components/ui/sidebar/context/useSidebar.hook"
+import { SidebarItem } from "@/components/ui/sidebar/sidebar"
 import { cn } from "@/utils/cn"
+import { getRecentlyListened } from "@/utils/recently-listened"
+import { useMemo } from "react"
+import { useAlbums, useArtists } from "../api/get-recently-listened"
+import {
+	isAlbum,
+	isPlaylist,
+	type AlbumArtist,
+	type CardType,
+	type PlaylistOwner,
+} from "../types"
+import Card from "./card"
+import CardSkeletons from "./card-skeletons"
 
-function Cards() {
+import { usePlaylists } from "@/features/playlists/api/get-playlists"
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function noramlizeData(data: any[]): CardType[] {
+	return data?.map(item => {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const base: any = {
+			id: item.id,
+			title: item.name,
+			img: item.images[0].url,
+			type: item.type,
+		}
+
+		if (isAlbum(item)) {
+			base["artists"] = (item.artists as unknown[] as AlbumArtist[]).map(
+				a => a.name
+			)
+		}
+
+		if (isPlaylist(item)) {
+			base["owner"] = (item.owner as unknown as PlaylistOwner).display_name
+		}
+
+		return base
+	})
+}
+
+function RecentlyListened() {
 	const { expanded } = useSidebar()
+
+	const recentlyListened = getRecentlyListened()
+
+	const artistsQuery = useArtists({ artistsIds: recentlyListened.artist })
+	const albumsQuery = useAlbums({ albumIds: recentlyListened.album })
+	const playlistsQuery = usePlaylists({
+		playlistIds: recentlyListened.playlist,
+	})
+
+	const isFetching =
+		artistsQuery.isFetching ||
+		albumsQuery.isFetching ||
+		playlistsQuery.isFetching
+
+	const recent = useMemo((): CardType[] => {
+		return noramlizeData([
+			...artistsQuery.data,
+			...albumsQuery.data,
+			...playlistsQuery.data,
+		])
+	}, [artistsQuery, albumsQuery, playlistsQuery])
+
 	return (
 		<ul
 			role="list"
@@ -13,98 +73,17 @@ function Cards() {
 				"m-1": !expanded,
 			})}
 		>
-			<SidebarItem>
-				<Card
-					title="Любимые треки"
-					imgSrc="https://misc.scdn.co/liked-songs/liked-songs-300.png"
-					type="playlist"
-				/>
-			</SidebarItem>
-
-			<SidebarItem>
-				<Card
-					title="Chillout - Summer 2024"
-					imgSrc="https://i2o.scdn.co/image/ab67706c0000cfa36dc96ff9d81f0163f91b4730"
-					type="playlist"
-				/>
-			</SidebarItem>
-
-			<SidebarItem>
-				<Card
-					title="FEDUC"
-					imgSrc="https://i.scdn.co/image/ab6761610000101f8a43511b9c423d5b8b36af6e"
-					type="author"
-				/>
-			</SidebarItem>
-
-			<SidebarItem>
-				<Card
-					title="Любимые треки"
-					imgSrc="https://misc.scdn.co/liked-songs/liked-songs-300.png"
-					type="playlist"
-				/>
-			</SidebarItem>
-			<SidebarItem>
-				<Card
-					title="Chillout - Summer 2024"
-					imgSrc="https://i2o.scdn.co/image/ab67706c0000cfa36dc96ff9d81f0163f91b4730"
-					type="playlist"
-				/>
-			</SidebarItem>
-
-			<SidebarItem>
-				<Card
-					title="FEDUC"
-					imgSrc="https://i.scdn.co/image/ab6761610000101f8a43511b9c423d5b8b36af6e"
-					type="author"
-				/>
-			</SidebarItem>
-			<SidebarItem>
-				<Card
-					title="Любимые треки"
-					imgSrc="https://misc.scdn.co/liked-songs/liked-songs-300.png"
-					type="playlist"
-				/>
-			</SidebarItem>
-			<SidebarItem>
-				<Card
-					title="Chillout - Summer 2024"
-					imgSrc="https://i2o.scdn.co/image/ab67706c0000cfa36dc96ff9d81f0163f91b4730"
-					type="playlist"
-				/>
-			</SidebarItem>
-
-			<SidebarItem>
-				<Card
-					title="FEDUC"
-					imgSrc="https://i.scdn.co/image/ab6761610000101f8a43511b9c423d5b8b36af6e"
-					type="author"
-				/>
-			</SidebarItem>
-			<SidebarItem>
-				<Card
-					title="Любимые треки"
-					imgSrc="https://misc.scdn.co/liked-songs/liked-songs-300.png"
-					type="playlist"
-				/>
-			</SidebarItem>
-			<SidebarItem>
-				<Card
-					title="Chillout - Summer 2024"
-					imgSrc="https://i2o.scdn.co/image/ab67706c0000cfa36dc96ff9d81f0163f91b4730"
-					type="playlist"
-				/>
-			</SidebarItem>
-
-			<SidebarItem>
-				<Card
-					title="FEDUC"
-					imgSrc="https://i.scdn.co/image/ab6761610000101f8a43511b9c423d5b8b36af6e"
-					type="author"
-				/>
-			</SidebarItem>
+			{isFetching ? (
+				<CardSkeletons count={10} />
+			) : (
+				recent.map(item => (
+					<SidebarItem key={item.id}>
+						<Card cardData={item} />
+					</SidebarItem>
+				))
+			)}
 		</ul>
 	)
 }
 
-export default Cards
+export default RecentlyListened

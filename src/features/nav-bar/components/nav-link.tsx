@@ -12,12 +12,12 @@ import type { VariantProps } from "class-variance-authority"
 export type NavLinkProps = RouterNavLinkProps &
 	VariantProps<typeof buttonVariants> & {
 		icon?: ReactNode
-		children: ReactNode
+		children?: ReactNode
 	}
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
 	(
-		{ className, size, variant, hover, children, icon = null, ...props },
+		{ className, size, variant, hover, children = null, icon = null, ...props },
 		ref
 	) => {
 		return (
@@ -27,7 +27,7 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
 				className={({ isActive }) =>
 					cn(
 						buttonVariants({ size, variant, hover, className }),
-						"font-extrabold px-3",
+						"font-extrabold ",
 						{ "text-white": isActive }
 					)
 				}

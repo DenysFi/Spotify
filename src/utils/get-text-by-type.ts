@@ -1,19 +1,26 @@
+import {
+	isAlbum,
+	isPlaylist,
+	type CardType,
+} from "@/features/media-library/types"
+
 export enum CardVariantsEnum {
 	playlist = "playlist",
-	author = "author",
+	artist = "artist",
 	album = "album",
 }
 
 export type TCardVariantsEnum = keyof typeof CardVariantsEnum
 
-export function getTextByType(type: TCardVariantsEnum) {
-	if (type === CardVariantsEnum.author) {
-		return "Исполнитель "
+export function getTextByType(card: CardType) {
+	const { type } = card
+	if (type === CardVariantsEnum.artist) {
+		return `Исполнитель `
 	}
-	if (type === CardVariantsEnum.album) {
-		return "Альбом • Максимально длинный автор"
+	if (type === CardVariantsEnum.album && isAlbum(card)) {
+		return `Альбом • ${card.artists}`
 	}
-	if (type === CardVariantsEnum.playlist) {
-		return "Плейлист • Максимально длинный автор"
+	if (type === CardVariantsEnum.playlist && isPlaylist(card)) {
+		return `Плейлист • ${card.owner}`
 	}
 }

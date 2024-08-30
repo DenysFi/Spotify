@@ -1,7 +1,14 @@
-import { AudioLines } from "lucide-react";
+import { cn } from "@/utils/cn"
+import { AudioLines } from "lucide-react"
 
-function Logo({ color = "#1ED760" }: { color?: string }) {
-  return <AudioLines color={color} size={"50px"} />;
+function Logo({
+	className,
+	color = "#1ED760",
+}: {
+	className?: string
+	color?: string
+}) {
+	return <AudioLines className={cn(className)} color={color} size={"50px"} />
 }
 
-export default Logo;
+export default Logo

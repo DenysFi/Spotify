@@ -17,7 +17,6 @@ const Scrollbar = ({
 	const scrollThumbRef = useRef<HTMLDivElement>(null)
 	const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-	const observer = useRef<ResizeObserver | null>(null)
 	const timeoutId = useRef<number | null>(null)
 
 	const [isDragging, setIsDragging] = useState(false)
@@ -47,11 +46,9 @@ const Scrollbar = ({
 
 			setThumbHeight(newThumbHeight)
 
-			if (trackSize === newThumbHeight) {
-				setIsContentEquialTrack(true)
-			} else {
-				setIsContentEquialTrack(false)
-			}
+			trackSize === newThumbHeight
+				? setIsContentEquialTrack(true)
+				: setIsContentEquialTrack(false)
 		}
 	}
 
@@ -78,17 +75,24 @@ const Scrollbar = ({
 	}, [thumbHeight])
 
 	useEffect(() => {
-		if (!contentRef.current) return
+		if (!contentRef.current || !scrollContainerRef.current) return
 
 		const content = contentRef.current
 
-		observer.current = new ResizeObserver(handleResize)
-		observer.current.observe(content)
+		const resizeObserver = new ResizeObserver(handleResize)
+		resizeObserver.observe(content)
+
+		const mutationObserver = new MutationObserver(handleResize)
+		mutationObserver.observe(content, {
+			childList: true,
+			subtree: true,
+		})
 
 		content.addEventListener("scroll", handleThumbPosition)
 
 		return () => {
-			observer.current?.unobserve(content)
+			resizeObserver?.unobserve(content)
+			mutationObserver.disconnect()
 			content.removeEventListener("scroll", handleThumbPosition)
 		}
 	}, [handleThumbPosition])

@@ -9,7 +9,7 @@ import {
 } from "react"
 
 export type TooltipProps = ComponentPropsWithoutRef<
-	typeof TooltipPrimitive.Root
+	typeof TooltipPrimitive.Provider
 > & {
 	children: ReactNode
 }
@@ -17,10 +17,15 @@ export type TooltipProps = ComponentPropsWithoutRef<
 export const Tooltip = ({
 	children,
 	delayDuration = 0,
+	skipDelayDuration = 0,
 	...props
 }: TooltipProps) => {
 	return (
-		<TooltipPrimitive.Provider delayDuration={delayDuration} {...props}>
+		<TooltipPrimitive.Provider
+			delayDuration={delayDuration}
+			skipDelayDuration={skipDelayDuration}
+			{...props}
+		>
 			<TooltipPrimitive.Root>{children}</TooltipPrimitive.Root>
 		</TooltipPrimitive.Provider>
 	)
@@ -38,7 +43,7 @@ export const TooltipContent = forwardRef<
 		<TooltipPrimitive.Portal>
 			<TooltipPrimitive.Content
 				className={cn(
-					"data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade py-1 px-2 text-white bg-iconPrimaryHover rounded-md text-sm font-semibold transition-all origin-[var(--radix-tooltip-content-transform-origin)]",
+					"relative z-50 data-[state=delayed-open]:animate-tooltipFade py-1 px-2 text-white bg-iconPrimaryHover rounded-md text-sm font-semibold transition-all origin-[var(--radix-tooltip-content-transform-origin)]",
 					className
 				)}
 				ref={ref}

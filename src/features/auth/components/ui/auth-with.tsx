@@ -15,12 +15,16 @@ function AuthWith({ iconSrc, label, action, type, className }: AuthWithProps) {
 		try {
 			const res = await action()
 
-			setFormData({
-				email: res.user.email!,
-				username: res.user.displayName!,
-			})
+			if (type === "register") {
+				setFormData({
+					email: res.user.email!,
+					username: res.user.displayName!,
+				})
 
-			navigate(".", { state: { step: 1, authWithService: true } })
+				navigate(".", { state: { step: 1, authWithService: true } })
+			} else {
+				navigate("/app")
+			}
 		} catch (error: unknown) {
 			if (error instanceof FirebaseError) {
 				console.error(error.customData)

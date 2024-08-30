@@ -5,7 +5,7 @@ import React from "react"
 import Spinner from "../spinner/spinner"
 
 const buttonVariants = cva(
-	"disabled:pointer-events-none disabled:opacity-50 inline-flex gap-2 items-center overflow-hidden  transition-colors font-bold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap ",
+	"active:opacity-75 active:scale-100 disabled:pointer-events-none disabled:opacity-75 inline-flex gap-2 items-center overflow-hidden  transition-colors font-bold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring  whitespace-nowrap ",
 	{
 		variants: {
 			variant: {
@@ -19,7 +19,7 @@ const buttonVariants = cva(
 			size: {
 				sm: "h-8 rounded-full px-4 py-1 text-sm ",
 				lg: "h-10 rounded-full px-2 py-1 text-base",
-				icon: "w-8 h-8 rounded-full flex items-center justify-center",
+				icon: "w-8 h-8  rounded-full flex items-center justify-center",
 			},
 			hover: {
 				pulse: "hover:scale-105",

@@ -9,15 +9,14 @@ import {
 type SidebarContextProps = {
 	expanded: boolean
 	setExpanded: Dispatch<SetStateAction<boolean>>
-}
+} | null
 
-export const SidebarContext = createContext<SidebarContextProps>({
-	expanded: true,
-	setExpanded: () => {},
-})
+export const SidebarContext = createContext<SidebarContextProps>(null)
 
 export const SidebarProvider = ({ children }: { children: ReactNode }) => {
-	const [expanded, setExpanded] = useState(true)
+	const savedExp = JSON.parse(localStorage.getItem("sidebar") || "true")
+
+	const [expanded, setExpanded] = useState<boolean>(savedExp)
 
 	return (
 		<SidebarContext.Provider value={{ expanded, setExpanded }}>

@@ -5,6 +5,7 @@ import { useSidebar } from "./context/useSidebar.hook"
 import { SidebarProvider } from "./context/sidebar-context"
 import { useResizer } from "../resizer/context/useResizer"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
+import type { TCardVariantsEnum } from "@/utils/get-text-by-type"
 
 const MIN_WIDTH = 72
 
@@ -19,9 +20,9 @@ export default function Sidebar({
 }: PropsWithClassnameNdChildren) {
 	return (
 		<SidebarProvider>
-			<nav role="Левый сайдбар" className={cn(className)}>
+			<aside role="Левый сайдбар" className={cn(className)}>
 				{children}
-			</nav>
+			</aside>
 		</SidebarProvider>
 	)
 }
@@ -31,7 +32,10 @@ export function SidebarItem({
 	className,
 }: PropsWithClassnameNdChildren) {
 	return (
-		<div className={cn(`transition-colors group relative  w-full`, className)}>
+		<div
+			// onClick={handleClick}
+			className={cn(`transition-colors group relative  w-full`, className)}
+		>
 			<SidebarContent>{children}</SidebarContent>
 		</div>
 	)
@@ -48,25 +52,12 @@ export function SidebarContent({
 	)
 }
 
-export function SidebarNavigation({
-	children,
-	className,
-}: PropsWithClassnameNdChildren) {
-	return <ul className={cn(className)}>{children}</ul>
-}
-
-export function SidebarNavigationItem({
-	children,
-}: PropsWithClassnameNdChildren) {
-	return children
-}
-
 export function SidebarToggleButton({
 	children,
 	className,
 }: PropsWithClassnameNdChildren) {
 	const { expanded, setExpanded } = useSidebar()
-	const { isResizing, setCurrentWidth, id, min } = useResizer()
+	const { isResizing, setCurrentWidth, setAnimation, id, min } = useResizer()
 
 	const toggleWidth = useCallback(() => {
 		const prevWidth = id
@@ -75,8 +66,22 @@ export function SidebarToggleButton({
 
 		setExpanded(state => !state)
 
+		localStorage.setItem("sidebar", String(!expanded))
+
 		expanded ? setCurrentWidth(MIN_WIDTH) : setCurrentWidth(prevWidth)
 	}, [expanded, min, id, setCurrentWidth, setExpanded])
+
+	useEffect(() => {
+		const expPrev = JSON.parse(localStorage.getItem("sidebar") || "true")
+		let tid: number
+		if (expPrev === false) {
+			setCurrentWidth(MIN_WIDTH)
+
+			tid = setTimeout(() => {}, 100)
+		}
+
+		return () => clearTimeout(tid)
+	}, [setCurrentWidth, setAnimation])
 
 	useEffect(() => {
 		function onResize() {
@@ -96,6 +101,7 @@ export function SidebarToggleButton({
 	return (
 		<Tooltip>
 			<TooltipTrigger
+				asChild
 				onClick={toggleWidth}
 				className={cn("rounded-full", className)}
 				aria-label={
@@ -126,9 +132,10 @@ export function SidebarMinMaxWithToggleButton({
 	return (
 		<Tooltip>
 			<TooltipTrigger
+				asChild
 				onClick={toggleWidth}
 				className={cn(
-					"transition-transform rotate-0 rounded-full",
+					"transition-transform rotate-0 ",
 					{ " rotate-180": !isMin },
 					className
 				)}

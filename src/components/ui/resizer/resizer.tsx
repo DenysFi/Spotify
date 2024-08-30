@@ -21,15 +21,21 @@ function Resizer({
 	className,
 	...props
 }: ResizerProps) {
-	const { contentRef, resizerRef, setCurrentWidth, isResizing, currentWidth } =
-		useResizable({
-			min,
-			max,
-			id,
-			saveLastWidth,
-			position,
-		})
-
+	const {
+		contentRef,
+		resizerRef,
+		setCurrentWidth,
+		isResizing,
+		setAnimation,
+		currentWidth,
+		animation,
+	} = useResizable({
+		min,
+		max,
+		id,
+		saveLastWidth,
+		position,
+	})
 	return (
 		<ResizerProvider
 			initial={{
@@ -41,6 +47,8 @@ function Resizer({
 				setCurrentWidth,
 				isResizing,
 				currentWidth,
+				animation,
+				setAnimation,
 			}}
 		>
 			<div
@@ -48,7 +56,7 @@ function Resizer({
 				className={cn(
 					"relative inline-block ",
 					{
-						"transition-[width]": !isResizing,
+						"transition-[width]": animation || !isResizing,
 					},
 					className
 				)}

@@ -13,8 +13,10 @@ export type UseResizableReturnType = {
 	contentRef: RefFunction
 	resizerRef: RefFunction
 	setCurrentWidth: Dispatch<SetStateAction<number>>
+	setAnimation: Dispatch<SetStateAction<boolean>>
 	isResizing: boolean
 	currentWidth: number
+	animation: boolean
 }
 export type UseResizableProps = {
 	min: number
@@ -34,9 +36,9 @@ export const useResizable = ({
 	const [contentNode, setContentNode] = useState<ElementRefProps>(null)
 	const [resizeNode, setResizeNode] = useState<ElementRefProps>(null)
 	const [isResizing, setIsResizing] = useState(false)
+	const [animation, setAnimation] = useState(false)
 
 	const savedWidth = localStorage.getItem(id)
-
 	const [currentWidth, setCurrentWidth] = useState(() =>
 		savedWidth && saveLastWidth ? parseInt(savedWidth) : min
 	)
@@ -111,5 +113,7 @@ export const useResizable = ({
 		resizerRef,
 		isResizing,
 		setCurrentWidth,
+		animation,
+		setAnimation,
 	} as const
 }

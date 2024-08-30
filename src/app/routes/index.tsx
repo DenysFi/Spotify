@@ -63,8 +63,36 @@ export const createRouter = () => {
 				{
 					path: "search",
 					lazy: async () => {
-						const { SearchRoute } = await import("./app/search-route")
+						const { SearchRoute } = await import("./app/search/search-route")
 						return { Component: SearchRoute }
+					},
+					children: [
+						{
+							path: "",
+							element: <div>Search</div>,
+							// lazy: async () => {
+							// 	const { RecommendationsRoute } = await import(
+							// 		"./app/recommendations-route"
+							// 	)
+							// 	return { Component: <div>Search</div> }
+							// },
+						},
+						{
+							path: ":query",
+							lazy: async () => {
+								const { SearchQueryRoute } = await import(
+									"./app/search/search-query-route"
+								)
+								return { Component: SearchQueryRoute }
+							},
+						},
+					],
+				},
+				{
+					path: "playlist/:playlistId",
+					lazy: async () => {
+						const { PlaylistRoute } = await import("./app/playlist-route")
+						return { Component: PlaylistRoute }
 					},
 				},
 			],

@@ -2,26 +2,27 @@ import { cn } from "@/utils/cn"
 import { cva, type VariantProps } from "class-variance-authority"
 import type { HtmlHTMLAttributes } from "react"
 
-const cardImageVariants = cva(
+export const cardImageVariants = cva(
 	"rounded-sm relative overflow-hidden w-full h-full",
 	{
 		variants: {
 			variant: {
-				author: "rounded-full",
+				artist: "rounded-full",
 				playlist: "",
 				album: "",
 			},
 			size: {
 				sm: "max-w-12 max-h-12",
 				md: "max-w-44 max-h-44",
-				lg: "max-w-[21rem] max-h-[21rem]",
+				lg: "max-w-56 max-h-56",
+				xl: "max-w-[21rem] max-h-[21rem]",
 			},
 		},
 		defaultVariants: { size: "sm" },
 	}
 )
 
-type CardImageProps = VariantProps<typeof cardImageVariants> &
+export type CardImageProps = VariantProps<typeof cardImageVariants> &
 	HtmlHTMLAttributes<HTMLDivElement> & {
 		imgSrc: string
 	}

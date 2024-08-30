@@ -50,7 +50,7 @@ export const SearchInput = ({
 			/>
 
 			<Tooltip>
-				<TooltipTrigger>
+				<TooltipTrigger asChild>
 					<Button
 						size={"icon"}
 						variant={"iconTransparent"}
@@ -64,7 +64,7 @@ export const SearchInput = ({
 						<Search className="w-4 h-4" />
 					</Button>
 				</TooltipTrigger>
-				<TooltipContent sideOffset={25}>
+				<TooltipContent sideOffset={5}>
 					<span>Искать в медиатеке</span>
 				</TooltipContent>
 			</Tooltip>

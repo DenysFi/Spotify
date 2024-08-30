@@ -1,0 +1,7 @@
+:root {
+	--resizer-bg-hover: hsla(0, 0%, 100%, 0.3);
+	--resizer-bg-active: hsla(0, 0%, 100%, 0.671);
+}
+.resizer-outline:focus-within {
+	outline: 5px auto #3673d4;
+}

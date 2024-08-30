@@ -5,6 +5,8 @@
 @layer base {
 	:root {
 		--panel-gap: 0.5rem;
+		--content-spacing: 1.25rem;
+		--layout-header-height: 4rem;
 
 		--ring: #ffffff;
 		--primary-bg: #121212;
@@ -15,6 +17,7 @@
 
 		--green: #1ed760;
 		--main-gray: #a7a7a7;
+		--secondary-gray: #272727;
 		--primary: 0, 0%, 0%;
 		--primary-foreground: 0, 0%, 100%;
 
@@ -25,7 +28,10 @@
 		--text-button-hover: 0, 0%, 100%;
 
 		--icon-primary-foreground: 0, 0%, 16.47%;
-		--icon-secondaty-foreground: 0, 0%, 9.02%;
+		--icon-secondary-foreground: 0, 0%, 9.02%;
+
+		--background-elevated-base: #1f1f1f;
+		--background-elevated-highlight: #2a2a2a;
 	}
 }
 html,
@@ -47,4 +53,20 @@ body {
 	display: -webkit-box;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
+}
+
+.item-top-header-bg {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	height: 100%;
+	background: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.tracks-bg {
+	background-image: linear-gradient(
+		rgba(0, 0, 0, 0.6) 0,
+		var(--primary-bg) 100%
+	);
 }

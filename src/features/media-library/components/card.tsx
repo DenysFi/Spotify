@@ -6,43 +6,69 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip/tooltip"
 import { cn } from "@/utils/cn"
-import { getTextByType, type TCardVariantsEnum } from "@/utils/get-text-by-type"
-import type { HtmlHTMLAttributes } from "react"
+import { getTextByType } from "@/utils/get-text-by-type"
+import { useCallback, type HtmlHTMLAttributes } from "react"
+import type { CardType } from "../types"
+import { useLocation, useNavigate } from "react-router-dom"
 
 type CardProps = HtmlHTMLAttributes<HTMLLIElement> & {
-	type: TCardVariantsEnum
+	cardData: CardType
 	size?: "md" | "lg" | "sm"
-	imgSrc: string
-	title: string
 }
-function Card({ type, size, title, imgSrc, ...props }: CardProps) {
+function Card({ cardData, size, ...props }: CardProps) {
 	const { expanded } = useSidebar()
+
+	const navigate = useNavigate()
+
+	const handleClick = useCallback(() => {
+		navigate(`./${cardData.type}/${cardData.id}`)
+	}, [navigate, cardData])
+
+	const location = useLocation()
+	const isActive = new RegExp(
+		`^(?=.*${cardData.type})(?=.*${cardData.id}).*$`
+	).test(location.pathname)
+
 	return (
 		<li
 			role="listitem"
 			tabIndex={1}
+			onClick={handleClick}
 			className={cn(
 				"w-full transition-colors py-2 flex gap-3 items-center cursor-pointer hover:bg-iconPrimaryHover rounded-md",
 				{
 					"p-2": expanded,
 					"justify-center": !expanded,
+					"bg-iconPrimaryHover": isActive,
 				}
 			)}
 			{...props}
 		>
 			<Tooltip>
 				<TooltipTrigger className="shrink-0">
-					<CardСover variant={type} size={size} imgSrc={imgSrc} />
+					<CardСover
+						variant={cardData.type}
+						size={size}
+						imgSrc={cardData.img}
+						aria-label="cover"
+						role="link"
+					/>
 				</TooltipTrigger>
 				<TooltipContent
 					sideOffset={17}
 					side="right"
-					className={cn({ "opacity-0": expanded })}
+					className={cn({ invisible: expanded })}
 				>
 					<div>
-						<h3 className="text-white font-extrabold text-base">{title}</h3>
+						<h3
+							className={cn("text-white font-extrabold text-base", {
+								"text-green-color": isActive,
+							})}
+						>
+							{cardData.title}
+						</h3>
 						<p className="text-textButton text-sm font-bold">
-							{getTextByType(type)}
+							{getTextByType(cardData)}
 						</p>
 					</div>
 				</TooltipContent>
@@ -50,9 +76,13 @@ function Card({ type, size, title, imgSrc, ...props }: CardProps) {
 
 			{expanded && (
 				<div className="flex flex-col items-start">
-					<h5 className="text-ellipsis-custom font-bold pb-1">{title}</h5>
+					<div className={cn({ "text-green-color": isActive })}>
+						<h5 className={"text-ellipsis-custom font-bold pb-1 "}>
+							<span>{cardData.title}</span>
+						</h5>
+					</div>
 					<p className=" text-ellipsis-custom text-sm text-textButton font-semibold">
-						{getTextByType(type)}
+						{getTextByType(cardData)}
 					</p>
 				</div>
 			)}

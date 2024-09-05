@@ -19,7 +19,7 @@ const TableHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const [isPinned, setIsPinned] = React.useState(false)
-	console.log(isPinned)
+
 	useEffect(() => {
 		if (!ref.current) return
 
@@ -31,6 +31,10 @@ const TableHeader = ({
 		)
 
 		observer.observe(ref.current)
+
+		return () => {
+			observer.disconnect()
+		}
 	}, [])
 
 	return (
@@ -38,9 +42,9 @@ const TableHeader = ({
 			role="tableheader"
 			ref={ref}
 			className={cn(
-				"sticky top-[-1px] z-10 w-full h-9 inline-block items-center border-b-[1px] border-white/10 mb-4 text-sm text-textButton pointer-events-none",
+				"sticky top-[-1px] z-30 w-full h-9  inline-block items-center border-b-[1px] border-white/10 mb-4 text-sm text-textButton pointer-events-none ",
 				{
-					"bg-[#1f1f1f] w-[calc(100%+var(--content-spacing)*2)] transition-colors duration-400 mx-[calc(var(--content-spacing)*-1)] px-[var(--content-spacing)]":
+					"bg-[#1f1f1f] w-[calc(100%+var(--content-spacing))*2] transition-colors duration-400 mx-[calc(var(--content-spacing)*-1)] px-[var(--content-spacing)]":
 						isPinned,
 				},
 				className
@@ -68,7 +72,11 @@ const TableRow = React.forwardRef<
 		role="tablerow"
 		ref={ref}
 		className={cn(
-			"grid gap-4 group w-full px-4 hover:bg-[hsla(0, 0%, 100%, .1)] hover:bg-white/10 rounded-[4px] transition-colors",
+			"grid gap-4 group w-full px-4 hover:bg-[hsla(0, 0%, 100%, .1)] items-center hover:bg-white/10 rounded-[4px] transition-colors",
+			"@[766px]:grid-cols-[1rem_minmax(7.5rem,_6fr)_minmax(7.5rem,_4fr)_minmax(7.5rem,_3fr)_minmax(7.5rem,_1fr)] @[530px]:grid-cols-[1rem_minmax(7.5rem,_6fr)_minmax(7.5rem,_4fr)_minmax(7.5rem,_1fr)] grid-cols-[1rem_minmax(7.5rem,_6fr)_minmax(7.5rem,_1fr)]",
+			"[&>*:nth-child(3)]:@[530px]:flex [&>*:nth-child(3)]:hidden",
+			"[&>*:nth-child(4)]:@[766px]:flex [&>*:nth-child(4)]:hidden",
+			"[&>*:nth-child(5)]:flex [&>*:nth-child(5)]:justify-end ",
 			className
 		)}
 		{...props}

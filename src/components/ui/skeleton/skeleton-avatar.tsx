@@ -2,21 +2,25 @@ import { type HtmlHTMLAttributes } from "react"
 import { cn } from "@/utils/cn"
 import { cva, type VariantProps } from "class-variance-authority"
 
-const skeletonAvatarVariants = cva("bg-secondaryGray rounded-sm  ", {
-	variants: {
-		variant: {
-			artist: "rounded-full",
-			playlist: "",
-			album: "",
+const skeletonAvatarVariants = cva(
+	"animate-pulse bg-secondaryGray rounded-sm  ",
+	{
+		variants: {
+			variant: {
+				avatar: "rounded-full",
+				track: "rounded",
+			},
+
+			size: {
+				sm: "w-12 h-12",
+				md: "w-[2.5rem] h-[2.5rem]",
+				lg: "w-56 h-56",
+				xl: "w-[21rem] h-[21rem]",
+			},
 		},
-		size: {
-			sm: "w-12 h-12",
-			md: "w-44 h-44",
-			lg: "w-[21rem] h-[21rem]",
-		},
-	},
-	defaultVariants: { size: "sm" },
-})
+		defaultVariants: { size: "sm" },
+	}
+)
 
 type SkeletonAvatarProps = VariantProps<typeof skeletonAvatarVariants> &
 	HtmlHTMLAttributes<HTMLDivElement>

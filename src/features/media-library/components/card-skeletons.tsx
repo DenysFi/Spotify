@@ -2,7 +2,6 @@ import { useSidebar } from "@/components/ui/sidebar/context/useSidebar.hook"
 import { SidebarItemHided } from "@/components/ui/sidebar/sidebar"
 import SkeletonAvatar from "@/components/ui/skeleton/skeleton-avatar"
 import SkeletonText from "@/components/ui/skeleton/skeleton-text"
-import SkeletonTitle from "@/components/ui/skeleton/skeleton-title"
 import { cn } from "@/utils/cn"
 
 function CardSkeletons({ count }: { count: number }) {
@@ -20,8 +19,8 @@ function CardSkeletons({ count }: { count: number }) {
 			<SkeletonAvatar className="shrink-0" />
 			<SidebarItemHided>
 				<div className="w-full flex flex-col  justify-center">
-					<SkeletonTitle className="mb-2" />
-					<SkeletonText />
+					<SkeletonText size={"md"} className="mb-2 w-[70%]" />
+					<SkeletonText className="w-[55%]" />
 				</div>
 			</SidebarItemHided>
 		</li>

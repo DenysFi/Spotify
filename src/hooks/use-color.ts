@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export const useColor = (url: string): string => {
+export const useColor = (url: string | undefined): string => {
 	const [color, setColor] = useState<string>("")
 
 	function loadImage(src: string): Promise<HTMLImageElement> {

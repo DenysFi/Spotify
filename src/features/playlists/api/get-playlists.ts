@@ -6,7 +6,7 @@ import { api } from "@/lib/api-client"
 import type { QueryConfig } from "@/lib/client-query"
 import { queryOptions, useQuery } from "@tanstack/react-query"
 
-type TrackItemsType = {
+export type TrackItemsType = {
 	added_at: string
 	added_by: {
 		id: string
@@ -14,7 +14,7 @@ type TrackItemsType = {
 	}
 	track: TrackItemType
 }
-type TrackItemType = {
+export type TrackItemType = {
 	duration_ms: string
 	id: string
 	name: string
@@ -22,6 +22,7 @@ type TrackItemType = {
 	type: "track"
 	album: Omit<GetAlbumReturn, "popularity">
 	artists: Pick<GetArtistsReturn, "id" | "name" | "type">[]
+	track_number: number
 }
 
 type TracksType = {

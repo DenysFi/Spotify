@@ -17,9 +17,7 @@ function AppRoot() {
 					</div>
 				}
 			>
-				<ErrorBoundary key={location.pathname} fallback={<MainErrorFallback />}>
-					<Outlet />
-				</ErrorBoundary>
+				<Outlet />
 			</Suspense>
 		</AppLayout>
 	)

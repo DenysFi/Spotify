@@ -1,8 +1,4 @@
-import { getPlaylistQueryOptions } from "@/features/playlists/api/get-playlist"
 import PlaylistView from "@/features/playlists/compontents/playlist-view"
-import { api } from "@/lib/api-client"
-import type { QueryClient } from "@tanstack/react-query"
-import type { LoaderFunctionArgs } from "react-router-dom"
 
 // export const playlistLoader =
 // 	(queryClient: QueryClient) =>

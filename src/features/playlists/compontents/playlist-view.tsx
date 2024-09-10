@@ -5,20 +5,22 @@ import PlaylistHeader from "./playlist-header"
 import PlaylistControl from "./playlist-control"
 import PlaylistTracks from "./playlist-tracks"
 import { ContentNotFound } from "./content-not-found"
+import {
+	getTrackDuration,
+	type GetTrackDurationProps,
+} from "@/utils/tracks-utils"
 
 function PlaylistView() {
 	const { playlistId } = useParams()
 
-	const query = usePlaylist({ playlistId: playlistId ?? "" })
+	const query = usePlaylist({ playlistId: playlistId as string })
 	const playlistData = query.data
 
-	const bgColor = useColor(query.data?.images[0]?.url || "")
+	const bgColor = useColor(query.data?.images[0]?.url)
 
-	const tracksTotalDurationMs =
-		query.data?.tracks.items.reduce(
-			(acc, item) => (acc += +item.track.duration_ms),
-			0
-		) || 0
+	const tracksTotalDurationMs = getTrackDuration(
+		query.data?.tracks.items as GetTrackDurationProps[] | undefined
+	)
 
 	if (query.isError) {
 		return <ContentNotFound />
@@ -29,7 +31,8 @@ function PlaylistView() {
 			<PlaylistHeader
 				isLoading={query.isLoading}
 				data={{
-					image: playlistData?.images[0]?.url,
+					label: "Плейлист",
+					image: playlistData?.images[0].url,
 					name: playlistData?.name,
 					description: playlistData?.description,
 					display_name: playlistData?.owner.display_name,
@@ -43,7 +46,7 @@ function PlaylistView() {
 					style={{ backgroundColor: bgColor }}
 				></div>
 				<PlaylistControl />
-				<PlaylistTracks id={playlistData?.id} />
+				<PlaylistTracks id={playlistId!} />
 			</div>
 		</section>
 	)

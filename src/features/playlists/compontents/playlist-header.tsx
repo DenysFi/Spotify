@@ -5,6 +5,7 @@ import { PlaylistHeaderSkeleton } from "./playlist-header-skeleton"
 
 interface PlaylistHeaderProps {
 	data: {
+		label: string | undefined
 		image: string | undefined
 		name: string | undefined
 		description: string | undefined
@@ -20,7 +21,7 @@ function PlaylistHeader({ data, isLoading }: PlaylistHeaderProps) {
 	const bgColor = useColor(data.image)
 
 	return !isLoading ? (
-		<div className=" px-[var(--content-spacing)] flex py-4  gap-5 relative">
+		<div className=" px-[var(--content-spacing)] flex py-4  gap-5 relative h-[256px]">
 			<div
 				className="item-top-header-bg"
 				style={{ backgroundColor: bgColor }}
@@ -33,14 +34,14 @@ function PlaylistHeader({ data, isLoading }: PlaylistHeaderProps) {
 				></CardCover>
 			</div>
 			<div className=" relative z-10 flex flex-col justify-end gap-1 ">
-				<span className="  text-sm font-semibold ">Плейлист</span>
-				<h2 className="@[800px]:text-3xl text-xl font-extrabold ">
+				<span className="  text-sm font-semibold ">{data.label}</span>
+				<h2 className="@[800px]:text-4xl text-xl font-extrabold ">
 					{data.name}
 				</h2>
 				<p className="text-white/70 text-sm mb-2 text-ellipsis-custom">
 					{data.description}
 				</p>
-				<div className="text-sm font-semibold">
+				<div className="text-sm font-normal">
 					<span className="font-extrabold mr-1">{data.display_name}</span>•{" "}
 					{data.total} треков
 					<span className="text-white/70 ml-1">

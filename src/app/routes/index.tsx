@@ -95,6 +95,13 @@ export const createRouter = () => {
 						return { Component: PlaylistRoute }
 					},
 				},
+				{
+					path: "album/:albumId",
+					lazy: async () => {
+						const { AlbumRoute } = await import("./app/album-route")
+						return { Component: AlbumRoute }
+					},
+				},
 			],
 		},
 	])

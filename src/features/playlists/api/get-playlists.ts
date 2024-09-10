@@ -1,9 +1,7 @@
-import type {
-	GetAlbumReturn,
-	GetArtistsReturn,
-} from "@/features/media-library/api/get-recently-listened"
+import type { GetAlbumReturn } from "@/features/album/api/get-album"
 import { api } from "@/lib/api-client"
 import type { QueryConfig } from "@/lib/client-query"
+import type { ArtistType } from "@/utils/tracks-utils"
 import { queryOptions, useQuery } from "@tanstack/react-query"
 
 export type TrackItemsType = {
@@ -21,11 +19,11 @@ export type TrackItemType = {
 	popularity: number
 	type: "track"
 	album: Omit<GetAlbumReturn, "popularity">
-	artists: Pick<GetArtistsReturn, "id" | "name" | "type">[]
+	artists: ArtistType[]
 	track_number: number
 }
 
-type TracksType = {
+export type TracksType = {
 	items: TrackItemsType[]
 	total: number
 }

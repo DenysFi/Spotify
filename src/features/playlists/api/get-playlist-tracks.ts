@@ -3,7 +3,7 @@ import type { QueryConfig } from "@/lib/client-query"
 import { infiniteQueryOptions, useInfiniteQuery } from "@tanstack/react-query"
 import type { TrackItemsType } from "./get-playlists"
 
-type GetPlaylistTrackReturn = {
+export type GetPlaylistTrackReturn = {
 	items: TrackItemsType[]
 	prevOffset: number
 	total: number
@@ -55,7 +55,7 @@ type UsePlaylistTracksOptions = {
 }
 
 export const usePlaylistTracks = ({
-	playlistId,
+	playlistId = "",
 	limit = 100,
 	queryConfig,
 }: UsePlaylistTracksOptions) => {

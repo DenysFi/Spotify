@@ -19,7 +19,7 @@ type UsePlaylistOptions = {
 }
 
 export const usePlaylist = ({
-	playlistId,
+	playlistId = "",
 	queryConfig,
 }: UsePlaylistOptions) => {
 	return useQuery({

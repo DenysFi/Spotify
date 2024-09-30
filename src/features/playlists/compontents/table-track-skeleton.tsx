@@ -1,6 +1,6 @@
 import SkeletonAvatar from "@/components/ui/skeleton/skeleton-avatar"
 import SkeletonText from "@/components/ui/skeleton/skeleton-text"
-import { TableCell, TableRow } from "@/components/ui/table/table"
+import { TableCell, TableRow } from "@/components/ui/table/Table"
 
 export function TableTrackSkeleton() {
 	return (

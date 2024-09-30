@@ -5,7 +5,7 @@ import {
 	TableHeader,
 	TableRow,
 	tableRowVariants,
-} from "@/components/ui/table/table"
+} from "@/components/ui/table/Table"
 import React from "react"
 import { TableTrackSkeleton } from "./table-track-skeleton"
 import { type VariantProps } from "class-variance-authority"

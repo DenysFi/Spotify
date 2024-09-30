@@ -14,7 +14,7 @@ export const cardImageVariants = cva(
 			size: {
 				sm: "max-w-12 max-h-12",
 				md: "max-w-44 max-h-44",
-				lg: "max-w-56 max-h-56",
+				lg: "max-w-56 max-h-56 ",
 				xl: "max-w-[21rem] max-h-[21rem]",
 			},
 		},
@@ -40,7 +40,7 @@ function CardСover({
 			{...props}
 		>
 			<img
-				className="w-full h-full  object-cover"
+				className="w-full h-full aspect-square object-cover"
 				aria-hidden="true"
 				draggable="false"
 				src={imgSrc}

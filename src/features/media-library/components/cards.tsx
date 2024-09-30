@@ -3,7 +3,8 @@ import { SidebarItem } from "@/components/ui/sidebar/sidebar"
 import { cn } from "@/utils/cn"
 import { getRecentlyListened } from "@/utils/recently-listened"
 import { useMemo } from "react"
-import { useAlbums, useArtists } from "../api/get-recently-listened"
+import { useArtists } from "../api/get-recently-listened"
+import { useAlbums } from "@/features/album/api/useAlbums"
 import {
 	isAlbum,
 	isPlaylist,

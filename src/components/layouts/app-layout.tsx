@@ -10,9 +10,11 @@ import { useToken } from "./api/useToken"
 import Loader from "../ui/loader/loader"
 import { Scrollbar } from "../ui/scrollbar"
 import LayoutHeader from "@/features/layout-header/components/layout-header"
+import { useLocation } from "react-router-dom"
 
 function AppLayout({ children }: { children: ReactNode }) {
 	const tokenQuery = useToken()
+	const { pathname } = useLocation()
 	return (
 		<Loader isLoading={tokenQuery.isLoading}>
 			<Head title="Spotify Music Player" />
@@ -33,7 +35,7 @@ function AppLayout({ children }: { children: ReactNode }) {
 					className="min-w-96 relative [grid-area:main] max-[1150px]:col-span-2"
 					aria-label="Основной контент"
 				>
-					<Scrollbar>
+					<Scrollbar key={pathname}>
 						<main className="w-full h-full">{children}</main>
 					</Scrollbar>
 				</Box>
@@ -44,7 +46,7 @@ function AppLayout({ children }: { children: ReactNode }) {
 					max={320}
 					id="current"
 				>
-					<Box className=" h-full " aria-label="Текущая музыка">
+					<Box className="h-full" aria-label="Текущая музыка">
 						Sidebar
 					</Box>
 				</Resizer>

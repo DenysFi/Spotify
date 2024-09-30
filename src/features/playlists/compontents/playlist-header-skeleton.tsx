@@ -1,21 +1,21 @@
-import SkeletonAvatar from "@/components/ui/skeleton/skeleton-avatar"
-import SkeletonText from "@/components/ui/skeleton/skeleton-text"
+import SkeletonAvatar from "@/components/ui/skeleton/skeleton-avatar";
+import SkeletonText from "@/components/ui/skeleton/skeleton-text";
 
 export function PlaylistHeaderSkeleton() {
-	return (
-		<div className=" px-[var(--content-spacing)] flex py-4  gap-5 relative">
-			<div
-				className="item-top-header-bg"
-				style={{ backgroundColor: "rgba(0, 0, 0, .5)" }}
-			></div>
+  return (
+    <div className="relative flex gap-5 px-[var(--content-spacing)] py-4">
+      <div
+        className="item-top-header-bg"
+        style={{ backgroundColor: "rgba(0, 0, 0, .5)" }}
+      ></div>
 
-			<SkeletonAvatar className="rounded shrink-0" size={"lg"} />
-			<div className=" relative z-10 flex flex-col justify-end gap-1 w-full">
-				<SkeletonText className="w-[20%] mb-3" />
-				<SkeletonText className="w-[50%] mb-1" size={"md"} />
-				<SkeletonText className="w-[70%] mb-4" />
-				<SkeletonText className="w-[40%]  " />
-			</div>
-		</div>
-	)
+      <SkeletonAvatar className="shrink-0 rounded" size={"lg"} />
+      <div className="relative z-10 flex w-full flex-col justify-end gap-1">
+        <SkeletonText className="mb-3 w-[20%]" />
+        <SkeletonText className="mb-1 w-[50%]" size={"md"} />
+        <SkeletonText className="mb-4 w-[70%]" />
+        <SkeletonText className="w-[40%]" />
+      </div>
+    </div>
+  );
 }

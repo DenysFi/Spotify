@@ -19,14 +19,13 @@ function PlaylistTracks({ id }: { id: string }) {
 	} = usePlaylistTracks({
 		playlistId: id,
 	})
-
 	const tracks = concatPages(data?.pages)
 
 	return (
 		<div className="p-[var(--content-spacing)] " key={id}>
 			<InfiniteScroll show={isFetched && hasNextPage} callback={fetchNextPage}>
 				<TracksTable
-					ids={tracks?.map(item => item.track.id)}
+					ids={tracks.map(item => item.track.id)}
 					isLoading={!data || isLoading || isFetchingNextPage}
 					data={tracks}
 					columns={[

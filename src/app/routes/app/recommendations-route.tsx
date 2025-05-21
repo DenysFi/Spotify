@@ -1,3 +1,5 @@
+import Recommendations from "@/features/recommendation/Recommendations";
+
 export function RecommendationsRoute() {
-	return <div>recommendation</div>
+  return <Recommendations />;
 }

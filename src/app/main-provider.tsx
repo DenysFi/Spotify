@@ -1,6 +1,7 @@
 import MainErrorFallback from "@/components/errors/main-error-falback"
 import AuthProvider from "@/features/auth/context/auth-context"
 import { queryClient } from "@/lib/client-query"
+import { RecentlyListenedProvider } from "@/utils/recently-listened-context"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import React from "react"
@@ -14,7 +15,11 @@ function AppProvider({ children }: { children: React.ReactNode }) {
 				<HelmetProvider>
 					<QueryClientProvider client={queryClient}>
 						<ReactQueryDevtools />
-						<AuthProvider>{children}</AuthProvider>
+						<AuthProvider>
+							<RecentlyListenedProvider>
+								{children}
+							</RecentlyListenedProvider>
+						</AuthProvider>
 					</QueryClientProvider>
 				</HelmetProvider>
 			</ErrorBoundary>

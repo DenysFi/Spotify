@@ -1,0 +1,2 @@
+C:\Users\Denys\source\repos\ReactApp3\reactapp3.client\obj\Debug\reactapp3.client.esproj.CoreCompileInputs.cache
+C:\Users\Denys\Desktop\ReactApp3\reactapp3.client\obj\Debug\reactapp3.client.esproj.CoreCompileInputs.cache

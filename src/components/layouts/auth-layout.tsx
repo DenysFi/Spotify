@@ -1,46 +1,46 @@
-import React, { type PropsWithChildren } from "react"
-import Head from "../seo/head"
-import Logo from "../ui/logo/logo"
-import { cn } from "@/utils/cn"
+import { cn } from "@/utils/cn";
+import { type PropsWithChildren } from "react";
+import Head from "../seo/head";
+import Logo from "../ui/logo/logo";
 
 interface AuthLayoutProps extends PropsWithChildren {
-	type: "login" | "registrate"
+  type: "login" | "registrate";
 }
 
 function Header() {
-	return (
-		<div className="pt-8 pb-6">
-			<Logo color="white" />
-		</div>
-	)
+  return (
+    <div className="pb-6 pt-8">
+      <Logo color="white" />
+    </div>
+  );
 }
 
 function AuthLayout({ children, type }: AuthLayoutProps) {
-	const headTitle = type.charAt(0).toUpperCase() + type.slice(1)
-	const isLogin = type === "login"
+  const headTitle = type.charAt(0).toUpperCase() + type.slice(1);
+  const isLogin = type === "login";
 
-	return (
-		<section
-			className={cn("h-full w-full bg-primaryBg flex flex-col items-center ", {
-				"mdmobile:bg-primaryBgGradient mdmobile:p-8": isLogin,
-			})}
-		>
-			<Head title={`${headTitle} | Spotify`} />
-			{!isLogin && (
-				<>
-					<Header />
-					{children}
-				</>
-			)}
+  return (
+    <section
+      className={cn("flex h-full w-full flex-col items-center bg-primaryBg", {
+        "mdmobile:bg-primaryBgGradient mdmobile:p-8": isLogin,
+      })}
+    >
+      <Head title={`${headTitle} | MusicLib`} />
+      {!isLogin && (
+        <>
+          <Header />
+          {children}
+        </>
+      )}
 
-			{isLogin && (
-				<div className="max-w-[45em] w-full bg-primaryBg flex flex-col items-center mdmobile:rounded-lg pb-8 px-4">
-					<Header />
-					{children}
-				</div>
-			)}
-		</section>
-	)
+      {isLogin && (
+        <div className="flex w-full max-w-[45em] flex-col items-center bg-primaryBg px-4 pb-8 mdmobile:rounded-lg">
+          <Header />
+          {children}
+        </div>
+      )}
+    </section>
+  );
 }
 
-export default AuthLayout
+export default AuthLayout;

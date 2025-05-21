@@ -1,99 +1,116 @@
-import { Button } from "@/components/ui/button"
-import { useAuth } from "@/features/auth/context/useAuth"
-import { Download, Bell, House } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/features/auth/context/useAuth";
+import { Bell, GamepadIcon, House } from "lucide-react";
 
 import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
-} from "@/components/ui/tooltip/tooltip"
-import Logo from "@/components/ui/logo/logo"
-import NavLink from "@/features/nav-bar/components/nav-link"
-import HeaderSearchInput from "./header-search-input"
-import { signOut } from "firebase/auth"
-import { auth } from "@/lib/auth"
+  Dropdown,
+  DropdownContent,
+  DropdownItem,
+  DropdownTrigger,
+} from "@/components/ui/dropdown/dropdown";
+import Logo from "@/components/ui/logo/logo";
 import {
-	Dropdown,
-	DropdownContent,
-	DropdownItem,
-	DropdownTrigger,
-} from "@/components/ui/dropdown/dropdown"
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip/tooltip";
+import NavLink from "@/features/nav-bar/components/nav-link";
+import { useNavigate } from "react-router-dom";
+import HeaderSearchInput from "./header-search-input";
 
 function LayoutHeader() {
-	const user = useAuth()
-
-	return (
-		<header className="[grid-area:header] flex items-center h-full justify-between relative">
-			<Logo className="ml-3" />
-			<div className=" min-[1600px]:absolute right-0 left-0 h-full  flex items-center min-[1600px]:justify-center gap-2">
-				<div className="w-[50%] flex gap-2 max-w-[34rem] min-w-[21rem]">
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<NavLink
-								to="/app"
-								end
-								size="icon"
-								hover="pulse"
-								className="bg-[var(--background-elevated-base)] p-6"
-								aria-label="Домашняя страница"
-								variant="icon"
-								icon={<House />}
-							/>
-						</TooltipTrigger>
-						<TooltipContent side="bottom" sideOffset={7}>
-							<span>Домашняя страница</span>
-						</TooltipContent>
-					</Tooltip>
-					<HeaderSearchInput />
-				</div>
-			</div>
-			<div className="flex gap-2 relative z-10 items-center">
-				<Button
-					size={"sm"}
-					variant={"pillFilled"}
-					hover={"pulse"}
-					className="max-[1200px]:hidden"
-				>
-					Узнать больше о Premium
-				</Button>
-				<Button
-					size="sm"
-					variant="default"
-					hover="pulse"
-					iconLeft={<Download className="h-4 w-4" strokeWidth={3} />}
-					className="max-[1200px]:hidden"
-				>
-					Установить приложение
-				</Button>
-				<Button size="icon" variant="icon" hover="pulse">
-					<Bell className="h-4 w-4" />
-				</Button>
-				<Dropdown modal={false}>
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<DropdownTrigger asChild>
-								<Button
-									variant="icon"
-									hover="pulse"
-									className="w-12 h-12 p-0 bg-[var(--background-elevated-base)] flex items-center justify-center"
-								>
-									<span className="bg-green-400  w-8 h-8 text-black rounded-full flex items-center justify-center">
-										{user.currentUser?.displayName?.charAt(0)}
-									</span>
-								</Button>
-							</DropdownTrigger>
-						</TooltipTrigger>
-						<TooltipContent sideOffset={10}>
-							<span>{user.currentUser?.displayName}</span>
-						</TooltipContent>
-					</Tooltip>
-					<DropdownContent className="mr-2" sideOffset={5} alignOffset={50}>
-						<DropdownItem onClick={() => signOut(auth)}>Выйти</DropdownItem>
-					</DropdownContent>
-				</Dropdown>
-			</div>
-		</header>
-	)
+  const user = useAuth();
+  const navigate = useNavigate();
+  return (
+    <header className="relative flex h-full items-center justify-between [grid-area:header]">
+      <Logo className="ml-3" />
+      <div className="left-0 right-0 flex h-full items-center gap-2 min-[1600px]:absolute min-[1600px]:justify-center">
+        <div className="flex w-[50%] min-w-[21rem] max-w-[34rem] gap-2">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <NavLink
+                to="/app"
+                end
+                size="icon"
+                hover="pulse"
+                className="bg-[var(--background-elevated-base)] p-6"
+                aria-label="Домашняя страница"
+                variant="icon"
+                icon={<House />}
+              />
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={7}>
+              <span>Домашняя страница</span>
+            </TooltipContent>
+          </Tooltip>
+          <HeaderSearchInput />
+        </div>
+      </div>
+      <div className="relative z-10 flex items-center gap-2">
+        <Button size="icon" variant="icon" hover="pulse">
+          <Bell className="h-4 w-4" />
+        </Button>
+        <Button
+          size="sm"
+          variant="pillFilled"
+          className=""
+          iconLeft={<GamepadIcon className="h-4 w-4" />}
+          hover="pulse"
+          onClick={() => navigate("./tetris")}
+          aria-label="Играть в Tetris"
+        >
+          Играть в Tetris
+        </Button>
+        <Dropdown modal={false}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DropdownTrigger asChild>
+                <Button
+                  variant="icon"
+                  hover="pulse"
+                  className="flex h-12 w-12 items-center justify-center bg-[var(--background-elevated-base)] p-0"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green-400 text-black">
+                    {user.currentUser?.displayName?.charAt(0)}
+                  </span>
+                </Button>
+              </DropdownTrigger>
+            </TooltipTrigger>
+            <TooltipContent sideOffset={10}>
+              <span>{user.currentUser?.displayName}</span>
+            </TooltipContent>
+          </Tooltip>
+          <DropdownContent
+            className="z-50 mr-2"
+            sideOffset={5}
+            alignOffset={50}
+          >
+            <DropdownItem
+              onClick={() => {
+                fetch("/logout", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: "",
+                })
+                  .then((data) => {
+                    if (data.ok) {
+                      user.setCurrentUser(null);
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              }}
+            >
+              Выйти
+            </DropdownItem>
+          </DropdownContent>
+        </Dropdown>
+      </div>
+    </header>
+  );
 }
 
-export default LayoutHeader
+export default LayoutHeader;
